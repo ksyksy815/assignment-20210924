@@ -1,0 +1,15 @@
+#basic-button {
+  background: var(--dark-main);
+  color: #fff;
+  border: none;
+  border-radius: 5px;
+  text-align: center;
+  min-width: 64px;
+  height: 36px;
+  padding: 0 16px;
+}
+
+#basic-button:hover {
+  cursor: pointer;
+  background: var(--dark-main-lighter);
+}
