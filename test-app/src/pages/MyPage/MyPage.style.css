@@ -1,0 +1,43 @@
+#mypage {
+  width: 100vw;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  row-gap: 2rem;
+  padding: 2rem;
+}
+
+#order-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1rem;
+}
+
+#order-list > li {
+  display: flex;
+  flex-direction: column;
+  row-gap: 0.5rem;
+  cursor: pointer;
+}
+
+#order-list > li > div:first-child {
+  width: 200px;
+  height: 200px;
+  display: grid;
+  place-content: center;
+  background: var(--light-gray);
+}
+
+#order-list > li > div:last-child {
+  font-weight: bold;
+  display: grid;
+  place-content: center;
+}
+
+.order-list-skeleton > div:last-child {
+  width: 200px;
+  height: 20px;
+  background: var(--light-gray);
+  position: relative;
+}
