@@ -3,12 +3,22 @@ import * as types from '../actions/ActionTypes'
 
 const loginStatusReducer = (state = initialState, action) => {
   switch (action.type) {
-    case (types.SET_TOKEN):
+    case (types.LOG_IN):
       return {
         ...state,
         user: {
           ...state.user,
-          token: action.payload.token
+          token: action.payload.token,
+          login: true
+        }
+      }
+    case (types.LOG_OUT):
+      return {
+        ...state,
+        user: {
+          ...state.user,
+          token: "",
+          login: false
         }
       }
     default:

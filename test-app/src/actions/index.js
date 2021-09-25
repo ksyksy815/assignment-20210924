@@ -1,10 +1,16 @@
 import * as types from './ActionTypes'
 
-export const setToken = (token) => {
+export const login = (token) => {
   return {
-    type: types.SET_TOKEN,
+    type: types.LOG_IN,
     payload: {
       token
     }
+  }
+}
+
+export const logout = () => {
+  return {
+    type: types.LOG_OUT
   }
 }
