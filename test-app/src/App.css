@@ -1,7 +1,7 @@
 :root {
-  --dark-main: rgb(46,47,49);
+  --dark-main: rgb(46, 47, 49);
   --dark-main-lighter: rgb(84, 87, 92);
-  --light-gray: rgb(245,246,249);
+  --light-gray: rgb(245, 246, 249);
 }
 
 * {
@@ -10,7 +10,8 @@
   box-sizing: border-box;
 }
 
-ul, ol {
+ul,
+ol {
   list-style: none;
 }
 
@@ -21,4 +22,8 @@ a {
 
 input:focus {
   outline: none;
+}
+
+.loading-message {
+  text-align: center;
 }

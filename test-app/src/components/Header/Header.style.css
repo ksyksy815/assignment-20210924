@@ -8,19 +8,17 @@ header {
   color: #fff;
 }
 
-ul {
+nav > ul {
   display: flex;
   column-gap: 5rem;
 }
 
-li {
+nav > ul > li {
   transition: 0.2s;
-  
 }
 
-li:hover {
+nav > ul > li:hover {
   transform: translateY(-2px);
-  
 }
 
 a {

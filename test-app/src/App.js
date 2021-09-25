@@ -5,6 +5,8 @@ import ServicePage from './pages/Service/ServicePage'
 import SignUpPage from './pages/SignUp/SignUpPage'
 import LoginPage from './pages/Login/LoginPage'
 import MyPage from './pages/MyPage/MyPage'
+import Logout from './pages/Logout/Logout'
+import ItemDetailPage from './pages/ItemDetail/ItemDetailPage'
 
 function App() {
   return (
@@ -23,6 +25,12 @@ function App() {
           </Route>
           <Route exact path='/mypage/order'>
             <MyPage />
+          </Route>
+          <Route exact path='/mypage/order/:id'>
+            <ItemDetailPage />
+          </Route>
+          <Route path='/logout'>
+            <Logout />
           </Route>
         </Switch>
       </div>

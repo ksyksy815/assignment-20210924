@@ -1,43 +1,51 @@
 import { useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import './SignupForm.style.css'
+import { useDispatch } from 'react-redux'
+import { login } from '../../actions/index'
+import './form.style.css'
 import BasicButton from '../Button/BasicButton'
-import requestSignUp from '../../pages/SignUp/SignUpAPI'
+import requestSignUp from '../../pages/SignUp/signUpAPI'
 
 export default function SignupForm() {
   const history = useHistory()
+  const dispatch = useDispatch()
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
   const [passwordCheck, setPasswordCheck] = useState('')
   const [mobile, setMobile] = useState('')
 
+  // 이메일 유효성 체크
   const checkEmailValidity = (email) => {
-    console.log("오니?: checkEmailValidity 안")
     const emailRegex = /^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$/ig
 
     if (emailRegex.test(email) === false) return false;
     return true
   }
 
-  const checkPasswordValidity = (password) => {
-    if ( password.length < 8 || password.length > 15) {
-      return false
-    } else {
-      return true
-    }
+  // 이메일이 유효하지 않은 경우 alert
+  const promptAlert = (e) => {
+    alert("이메일을 확인해주세요.")
+    e.target.focus()
   }
 
-  // 회원가입: 가입하기 버튼 클릭 시
+  // 비밀번호 유효성 체크
+  const checkPasswordValidity = (password) => {
+    if ( password.length < 8 || password.length > 15) return false;
+    return true
+  }
+
+  // 가입하기 버튼 클릭 시
   const handleSubmit = async (e) => {
     e.preventDefault()
 
-    // 비밀번호 유효성 체크
+    // 비밀번호 유효성 체크 여부에 따른 alert
     if (!checkPasswordValidity(password)) {
       alert("비밀번호는 8~15자여야 합니다.")
       e.target[1].focus()
     }
 
-    // 비밀번호 확인 불일치 여부 체크
+    // 비밀번호 확인 불일치 여부 체크 alert
     else if (password !== passwordCheck) {
       alert("비밀번호가 일치하지 않습니다.")
       e.target[2].focus()
@@ -46,13 +54,16 @@ export default function SignupForm() {
     // 모든 필드 유효성 체크 완료 시 API 요청 & 서비스 페이지로 이동
     else {
       const token = await requestSignUp ({ email, password, mobile })
+      
       // 전역 상태에 토큰 넣어주기
-      console.log(token)
+      dispatch(login(token))
 
+      // 서비스 페이지로 이동
       history.push('/')
     }
   }
 
+  // 인풋 필드값 변경 반영
   const handleChange = (e) => {
     switch (e.target.id) {
       case 'email':
@@ -78,12 +89,7 @@ export default function SignupForm() {
     }
   }
 
-  const handleEmailInvalidity = (e) => {
-    // 유효하지 않은 경우, 이메일 확인 Alert 후 이메일 필드로 커서 이동 
-    alert("이메일을 확인해주세요.")
-    e.target.focus()
-  }
-
+  // 이메일 필드 focus out 일 떄 유효성 확인 후 보더 변경
   const handleOnFocusOut = (e) => {
     if (!checkEmailValidity(email)) {
       e.target.style.border = '3px solid red'
@@ -102,7 +108,7 @@ export default function SignupForm() {
           autoComplete="off" 
           onChange={handleChange}
           onBlur={handleOnFocusOut}
-          onInvalid={handleEmailInvalidity}
+          onInvalid={promptAlert}
         />
       </div>
       <div>
