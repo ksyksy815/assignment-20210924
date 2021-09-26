@@ -37,7 +37,7 @@
 
 .order-list-skeleton > div:last-child {
   width: 200px;
-  height: 20px;
+  height: 19px;
   background: var(--light-gray);
   position: relative;
 }

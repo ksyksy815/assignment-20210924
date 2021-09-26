@@ -1,3 +1,4 @@
+import MovePageButton from './MovePageButton'
 import './Pagination.style.css'
 
 export default function Pagination({totalPage, currentPage, getListByPage, setLoading}) {
@@ -27,10 +28,12 @@ export default function Pagination({totalPage, currentPage, getListByPage, setLo
 
   return (
     <ul id="pagination">
-      <li 
-        onClick={movePage} 
-        className={currentPage === 1 ? "disabled" : null}
-      >Prev</li>
+      <MovePageButton 
+        content="Prev" 
+        movePage={movePage} 
+        currentPage={currentPage} 
+        totalPage={1} 
+      /> 
       {
         [...new Array(totalPage)].map((el, i) => {
           const pageNumber = i + 1
@@ -46,10 +49,12 @@ export default function Pagination({totalPage, currentPage, getListByPage, setLo
           )
         })
       }
-      <li 
-        onClick={movePage}
-        className={currentPage === totalPage ? "disabled" : null}
-      >Next</li>
+      <MovePageButton 
+        content="Next" 
+        movePage={movePage} 
+        currentPage={currentPage} 
+        totalPage={totalPage} 
+      /> 
     </ul>
   )
 }
