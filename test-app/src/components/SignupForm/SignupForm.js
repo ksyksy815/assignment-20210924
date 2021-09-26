@@ -31,7 +31,7 @@ export default function SignupForm() {
 
   // 비밀번호 유효성 체크
   const checkPasswordValidity = (password) => {
-    if ( password.length < 8 || password.length > 15) return false;
+    if ( password.length < 7 || password.length > 15) return false;
     return true
   }
 
@@ -39,8 +39,13 @@ export default function SignupForm() {
   const handleSubmit = async (e) => {
     e.preventDefault()
 
+    // 빈칸 여부 체크
+    if (email === '' || password === '' || passwordCheck === '' || mobile === ''){
+      alert("모든 칸은 필수입니다.")
+    }
+
     // 비밀번호 유효성 체크 여부에 따른 alert
-    if (!checkPasswordValidity(password)) {
+    else if (!checkPasswordValidity(password)) {
       alert("비밀번호는 8~15자여야 합니다.")
       e.target[1].focus()
     }
