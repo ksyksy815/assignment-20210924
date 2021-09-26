@@ -1,20 +1,24 @@
 import { useState, useEffect, useCallback } from 'react'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import getOrderList from './orderListAPI'
 import './MyPage.style.css'
 import Pagination from '../../components/Pagination/Pagination'
 import ListItem from '../../components/OrderList/ListItem'
+import { updateCurrentPage } from '../../actions'
 
 export default function MyPage() {
   const history = useHistory()
+  const dispatch = useDispatch()
+
   const loginStatus = useSelector(state => state.loginStatusReducer.user.login)
   const [loading, setLoading] = useState(true)
+
   const [totalPs, setTotalPs] = useState(null)
   const [pageNumber, setPageNumber] = useState(null)
   const [contents, setContents] = useState(new Array(10))
   
-  const getListByPage = useCallback (async (pageNumber) => {
+  const getListByPage = useCallback( async (pageNumber) => {
     const {totalPages, currentPage, content} = await getOrderList(pageNumber)
     
     setTotalPs(totalPages)  
@@ -29,6 +33,10 @@ export default function MyPage() {
       history.push('/login')
     }
   }, [loginStatus, history])
+
+  useEffect(() => {
+    dispatch(updateCurrentPage('마이페이지'))
+  }, [dispatch])
 
   useEffect(() => {
     if (loginStatus) getListByPage(0);

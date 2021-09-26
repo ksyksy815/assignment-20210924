@@ -1,17 +1,11 @@
-import { useState, useEffect } from 'react'
 import { Link } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import './Header.style.css'
 import logo from '../../assets/logo.png'
+import HeaderMenu from './HeaderMenu'
 
 export default function Header() {
-  const token = useSelector(state => state.loginStatusReducer.user.token)
-  const [login, setLogin] = useState(false)
-
-  useEffect(() => {
-    if (token !== '') setLogin(true);
-    else setLogin(false)
-  }, [token])
+  const loginStatus = useSelector(state => state.loginStatusReducer.user.login)
 
   return (
     <header>
@@ -20,21 +14,17 @@ export default function Header() {
       </div>
       <nav>
         <ul>
-          <li><Link to='/'>서비스</Link></li>
-          <li>
-            {
-              login ?
-              <Link to='/mypage/order'>마이페이지</Link> :
-              <Link to='/sign-up'>회원가입</Link>
-            }
-          </li>  
-          <li>
-            {
-              login ?
-              <Link to='/logout'>로그아웃</Link> :
-              <Link to='/login'>로그인</Link>
-            }
-          </li>
+          <HeaderMenu url="/" menuTitle="서비스" />
+          {
+            loginStatus ?
+            <HeaderMenu url="/mypage/order" menuTitle="마이페이지" /> :
+            <HeaderMenu url="/sign-up" menuTitle="회원가입" />
+          }
+          {
+            loginStatus ?
+            <HeaderMenu url="/logout" menuTitle="로그아웃" /> :
+            <HeaderMenu url="/login" menuTitle="로그인" />
+          }
         </ul>
       </nav>
     </header>

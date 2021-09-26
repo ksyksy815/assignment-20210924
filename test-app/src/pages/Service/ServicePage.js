@@ -1,12 +1,15 @@
-import { useSelector } from 'react-redux'
+import { useEffect } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { useHistory } from 'react-router-dom'
 import './ServicePage.style.css'
 import officeImg from '../../assets/office.jpeg'
 import BasicButton from '../../components/Button/BasicButton'
+import { updateCurrentPage } from '../../actions/index'
 
 
 export default function ServicePage() {
   const history = useHistory()
+  const dispatch = useDispatch()
   const loginStatus = useSelector (state => state.loginStatusReducer.user.login)
 
   // 토큰 있는 경우
@@ -19,6 +22,10 @@ export default function ServicePage() {
     alert("로그인이 필요한 서비스입니다.")
     history.push('/sign-up')
   }
+
+  useEffect(() => {
+    dispatch(updateCurrentPage('서비스'))
+  }, [dispatch])
 
   return (
     <div id="service-page">

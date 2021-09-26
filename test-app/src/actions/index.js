@@ -14,3 +14,12 @@ export const logout = () => {
     type: types.LOG_OUT
   }
 }
+
+export const updateCurrentPage = (currentPage) => {
+  return {
+    type: types.UPDATE_CURRENT_PAGE,
+    payload: {
+      currentPage
+    }
+  }
+}

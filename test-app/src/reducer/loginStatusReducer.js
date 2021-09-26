@@ -1,7 +1,7 @@
-import { initialState } from './initialState'
+import { userInitialState } from './initialState'
 import * as types from '../actions/ActionTypes'
 
-const loginStatusReducer = (state = initialState, action) => {
+const loginStatusReducer = (state = userInitialState, action) => {
   switch (action.type) {
     case (types.LOG_IN):
       return {

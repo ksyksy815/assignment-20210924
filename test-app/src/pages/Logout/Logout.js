@@ -5,6 +5,11 @@ import { logout } from '../../actions/index'
 import BasicButton from '../../components/Button/BasicButton'
 import './Logout.style.css'
 
+/*
+제작해야하는 페이지 목록에 로그아웃 페이지가 있지 않았으나,
+헤더에서 '로그아웃' 링크 시 /logout URL로 이동되어야 한다는 항목이 있어서 추가하였습니다.
+*/
+
 export default function Logout() {
   const dispatch = useDispatch()
   const history = useHistory()

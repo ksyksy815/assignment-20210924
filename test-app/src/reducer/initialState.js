@@ -1,6 +1,12 @@
-export const initialState = {
+export const userInitialState = {
   user: {
     token: "",
-    login: false
-  }
+    login: false,
+  },
+}
+
+export const pageInitialState = {
+  page: {
+    currentPage: ""
+  },
 }
